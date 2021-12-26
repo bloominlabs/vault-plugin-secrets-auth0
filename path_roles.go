@@ -177,15 +177,15 @@ const pathListRolesHelpSyn = `List the existing roles in this backend`
 const pathListRolesHelpDesc = `Roles will be listed by the role name.`
 
 const pathRolesHelpSyn = `
-Read, write and reference cloudflare policies that toekn can be made for.
+Read, write and reference auth0 policies that token can be made for.
 `
 
 const pathRolesHelpDesc = `
 This path allows you to read and write roles that are used to
-create cloudflare tokens. These roles are associated with cloudflare polices that
+create auth0 tokens. These roles are associated with auth0 polices that
 map directly to the route to read the access keys. For example, if the
-backend is mounted at "cloudflare" and you create a role at "cloudflare/roles/deploy"
-then a user could request access credentials at "cloudflare/creds/deploy".
+backend is mounted at "auth0" and you create a role at "auth0/roles/deploy"
+then a user could request access credentials at "auth0/creds/deploy".
 
 You can submit policies inline using a policy on disk (see Vault
 documentation for more information

@@ -1,6 +1,6 @@
 VERSION 0.6
 FROM golang:1.16
-WORKDIR /vault-plugin-secrets-cloudflare
+WORKDIR /vault-plugin-secrets-auth0
 
 deps:
     COPY go.mod go.sum ./
@@ -12,13 +12,14 @@ build:
     FROM +deps
     COPY *.go .
     COPY --dir ./cmd .
-    RUN CGO_ENABLED=0 go build -o bin/vault-plugin-secrets-cloudflare cmd/cloudflare/main.go
-    SAVE ARTIFACT bin/vault-plugin-secrets-cloudflare /cloudflare AS LOCAL bin/vault-plugin-secrets-cloudflare
+    RUN CGO_ENABLED=0 go build -o bin/vault-plugin-secrets-auth0 cmd/auth0/main.go
+    SAVE ARTIFACT bin/vault-plugin-secrets-auth0 /auth0 AS LOCAL bin/vault-plugin-secrets-auth0
 
 test:
     FROM +deps
     COPY *.go .
-    RUN --secret TEST_CLOUDFLARE_TOKEN CGO_ENABLED=0 go test github.com/bloominlabs/vault-plugin-secrets-cloudflare
+    ARG TEST_AUTH0_DOMAIN=https://test-stratos-host.us.auth0.com
+    RUN --secret TEST_AUTH0_ACCESS_TOKEN TEST_AUTH0_DOMAIN=$TEST_AUTH0_DOMAIN CGO_ENABLED=0 go test github.com/bloominlabs/vault-plugin-secrets-auth0
 
 dev:
   BUILD +build
