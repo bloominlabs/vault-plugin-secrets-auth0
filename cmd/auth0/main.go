@@ -3,10 +3,10 @@ package main
 import (
 	"os"
 
+	auth0 "github.com/bloominlabs/vault-plugin-secrets-auth0"
 	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/vault/api"
 	"github.com/hashicorp/vault/sdk/plugin"
-	auth0 "github.com/hostin-proj/hostin-proj/plugins/auth0"
 )
 
 func main() {
