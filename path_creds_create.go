@@ -71,6 +71,7 @@ func (b *backend) pathCredsRead(ctx context.Context, req *logical.Request, d *fr
 	duration := token.Expiry.UTC().Sub(time.Now().UTC())
 	resp.Secret.TTL = duration
 	resp.Secret.MaxTTL = duration
+	resp.Secret.Renewable = false
 
 	return resp, nil
 }
